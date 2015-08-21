@@ -1,0 +1,9 @@
+Assets/Resources/Music
+Assets/Resources/SE
+Assets/Resources/Image
+Library
+Temp
+*.pidb
+*.unityproj
+*.sln
+*.userprefs
