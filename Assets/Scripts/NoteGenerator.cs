@@ -5,19 +5,26 @@ public class NoteGenerator : MonoBehaviour {
 	public GameObject RedNode;
 	public GameObject BlueNode;
 	public bool isPlaying = false;
-	public static int samplesPerBeat;
-	public static float startY = 30.0F;
+	public int samplesPerBeat;
+	public float startY = 30.0F;
+
+	public static float noteSpeed; 
+
 	private AudioSource audio;
+	private Controller controller;
 	private int[,] data = SampleData.data;
 	private int preMusicalTime = -1;
 
 	// Use this for initialization
 	void Start () {
 		this.audio = GetComponent<AudioSource> ();
-		samplesPerBeat = (GetComponent<Music> ()).samplesPerBeat_;
+		this.controller = (GameObject.Find ("Controller")).GetComponent<Controller> ();
+
+		this.samplesPerBeat = (GetComponent<Music> ()).samplesPerBeat_;
+		noteSpeed = (startY / (samplesPerBeat * 4 * (1.0F / 44100.0F))) * 0.01F;
 		startMusic ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (Music.IsJustChanged && this.isPlaying) {
@@ -40,11 +47,15 @@ public class NoteGenerator : MonoBehaviour {
 				case 0:
 					break;
 				case 1:
+					GameObject note = null;
 					if(i % 2 == 0){
-						GameObject note = (GameObject)Instantiate(RedNode, new Vector3(i + 1.0F, startY, 0.0F), Quaternion.identity);
+						note = (GameObject)Instantiate(RedNode, new Vector3(i + 1.0F, startY, 0.0F), Quaternion.identity);
+
 					} else {
-						GameObject note = (GameObject)Instantiate(BlueNode, new Vector3(i + 1.0F, startY, 0.0F), Quaternion.identity);
+						note = (GameObject)Instantiate(BlueNode, new Vector3(i + 1.0F, startY, 0.0F), Quaternion.identity);
 					}
+					(note.GetComponent<Note>()).setNumber(i);
+					this.controller.setNote(note, this.preMusicalTime, i);
 					break;
 				case 2:
 					//TODO Begin Long Tone

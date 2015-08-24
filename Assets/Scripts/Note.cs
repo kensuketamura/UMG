@@ -6,7 +6,7 @@ public class Note : MonoBehaviour {
 	private float speed;
 	// Use this for initialization
 	void Start () {
-		this.speed = (NoteGenerator.startY / (NoteGenerator.samplesPerBeat * 4 * (1.0F / 44100.0F))) * 0.01F;
+		this.speed = NoteGenerator.noteSpeed;
 	}
 	
 	// Update is called once per frame
@@ -20,5 +20,10 @@ public class Note : MonoBehaviour {
 
 	void OnCollisionEnter(Collision otherObj) {
 		Destroy(gameObject);
+	}
+
+	public int setNumber(int num){
+		this.number = num;
+		return this.number;
 	}
 }

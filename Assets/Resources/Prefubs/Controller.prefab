@@ -106,19 +106,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 104662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a531438ba178d41dc898544de9997750, type: 3}
+  m_Script: {fileID: 11500000, guid: 14cb1bf8ce97e43eca373c7965088896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  keys: 0d00000014010000750000006e00000074000000760000006500000078000000
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  keys: 6d00000075000000620000007400000063000000650000007a0000000d000000
+  judgeImgs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  judgeLag: .300000012
+  judgeY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -172,7 +172,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!1001 &268356005
+--- !u!1001 &110797550
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -212,21 +212,66 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
-      propertyPath: keys.Array.data[1]
-      value: 109
+      propertyPath: judgeLag
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
-      propertyPath: keys.Array.data[3]
-      value: 98
-      objectReference: {fileID: 0}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
     - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
-      propertyPath: keys.Array.data[5]
-      value: 99
-      objectReference: {fileID: 0}
+      propertyPath: sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
     - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
-      propertyPath: keys.Array.data[7]
-      value: 122
-      objectReference: {fileID: 0}
+      propertyPath: sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: sounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: sounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: sounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: sounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: judgeImgs.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: b834c4560b98746ceaf2ab95487a9fed,
+        type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: judgeImgs.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1b571718524844668876f8c796aaf89d,
+        type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: judgeImgs.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 46fad3ab580c346cd9a24cde47e1adc5,
+        type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: judgeImgs.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0eaf3973c57e545b3a121b8efad7e298,
+        type: 3}
+    - target: {fileID: 11456482, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
+      propertyPath: judgeImgs.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4be2e1fa2c64f424497bc4afa12dc332,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 585ec96f95eb04719becacbb369f3834, type: 2}
   m_IsPrefabParent: 0
@@ -346,7 +391,7 @@ GameObject:
   - 82: {fileID: 1406863613}
   - 114: {fileID: 1406863612}
   m_Layer: 0
-  m_Name: NodeGenerator
+  m_Name: NoteGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,6 +503,8 @@ MonoBehaviour:
   RedNode: {fileID: 187880, guid: fe159e81290aa4d82aa84fabc77c79db, type: 2}
   BlueNode: {fileID: 187188, guid: 60a60553f66f0425f92d3179f7a730ce, type: 2}
   isPlaying: 0
+  samplesPerBeat: 0
+  startY: 30
 --- !u!4 &1406863615
 Transform:
   m_ObjectHideFlags: 0
