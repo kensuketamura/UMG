@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-	public static int combo = 0;
-	public static int score = 0;
+	public int combo = 0;
+	public int score = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -15,11 +15,15 @@ public class Player : MonoBehaviour {
 	
 	}
 
-	public static void addCombo(int c = 1){
-		combo += c;
+	public void addCombo(int c = 1){
+		this.combo += c;
 	}
 
-	public static void addScore(int s){
-		score += s;
+	public void addScore(int s){
+		this.score += s;
+	}
+
+	public void missCombo(){
+		this.combo = 0;
 	}
 }

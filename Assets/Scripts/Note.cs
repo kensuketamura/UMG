@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Note : MonoBehaviour {
 	public int number;
+	public Controller controller;
 	private float speed;
 	// Use this for initialization
 	void Start () {
@@ -19,11 +20,16 @@ public class Note : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision otherObj) {
+		this.controller.onDestroyNote ();
 		Destroy(gameObject);
 	}
 
 	public int setNumber(int num){
 		this.number = num;
 		return this.number;
+	}
+
+	public void setController(Controller c){
+		this.controller = c;
 	}
 }

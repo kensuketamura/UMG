@@ -2,14 +2,16 @@
 using System.Collections;
 
 public class Controller : MonoBehaviour {
+	public int playerNum = 0;
 	public AudioClip[] sounds = new AudioClip[8];
 	public KeyCode[] keys = new KeyCode[8];
-	public Sprite[] judgeImgs = new Sprite[5];
 	public GameObject[,] notes;
 	public float judgeLag = 0.1F;
 	public float judgeY;
 	private AudioSource audioSrc;
 	private Music music;
+	private DataScreen screen;
+	private Player[] player = new Player[2];
 
 	public enum Judge{
 		PERFECT,
@@ -24,6 +26,9 @@ public class Controller : MonoBehaviour {
 	void Start () {
 		this.audioSrc = this.GetComponent<AudioSource> ();
 		this.music = GameObject.Find ("NoteGenerator").GetComponent<Music> ();
+		this.screen = GameObject.Find ("DataScreen").GetComponent<DataScreen> ();
+		this.player [0] = GameObject.Find ("Player1").GetComponent<Player> ();
+		//this.player [1] = GameObject.Find ("Player2").GetComponent<Player> ();
 		notes = new GameObject[2000, 7];
 		this.judgeY = NoteGenerator.noteSpeed * (this.judgeLag / 0.01F);
 	}
@@ -46,81 +51,92 @@ public class Controller : MonoBehaviour {
 		}
 	}
 
-	GameObject findTargetNote(int num){
+	private GameObject findTargetNote(int num){
 		for (int i = 0; i < 16; i++) {
-			GameObject suffixNote = this.notes [Music.Near.CurrentMusicalTime + i - 32, num];
-			GameObject prefixNote = this.notes [Music.Near.CurrentMusicalTime - i - 32, num];
-			if (Music.MusicalTime - Music.Near.CurrentMusicalTime <= 0){
-				if (prefixNote != null) {
-					return prefixNote;
-				}
-				if (suffixNote != null) {
-					return suffixNote;
-				}
-			} else {
-				if (suffixNote != null) {
-					return suffixNote;
-				}
-				if (prefixNote != null) {
-					return prefixNote;
+			if(Music.Near.CurrentMusicalTime >= 32){
+				GameObject suffixNote = this.notes [Music.Near.CurrentMusicalTime + i - 32, num];
+				GameObject prefixNote = this.notes [Music.Near.CurrentMusicalTime - i - 32, num];
+				if (Music.MusicalTime - Music.Near.CurrentMusicalTime <= 0){
+					if (prefixNote != null) {
+						return prefixNote;
+					}
+					if (suffixNote != null) {
+						return suffixNote;
+					}
+				} else {
+					if (suffixNote != null) {
+						return suffixNote;
+					}
+					if (prefixNote != null) {
+						return prefixNote;
+					}
 				}
 			}
 		}
 		return null;
 	}
 
-	Judge judge(GameObject targetNote){
+	private Judge judge(GameObject targetNote){
 		float y = targetNote.transform.position.y;
 		float diffY = (y > 0)? y : (-y);
 		if (diffY <= this.judgeY) {
 			return Judge.PERFECT;
 		}
-		if(diffY <= this.judgeY * 1.5F) {
+		if(diffY <= this.judgeY * 2.5F) {
 			return Judge.GREAT;
 		}
-		if(diffY <= this.judgeY * 2.5F) {
+		if(diffY <= this.judgeY * 4.0F) {
 			return Judge.GOOD;
 		}
-		if(diffY <= this.judgeY * 4.0F) {
+		if(diffY <= this.judgeY * 5.0F) {
 			return Judge.BAD;
 		}
-		if(diffY <= this.judgeY * 5.0F) {
+		if(diffY <= this.judgeY * 6.0F) {
 			return Judge.MISS;
 		}
 		return Judge.NONE;
 	}
 
-	void evalAction(Judge judge, GameObject targetNote){
+	private void evalAction(Judge judge, GameObject targetNote){
 		switch (judge) {
 		case Judge.PERFECT:
-			Player.addScore(500);
-			Player.addCombo();
+			this.player[this.playerNum].addScore(500);
+			this.player[this.playerNum].addCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.GREAT:
-			Player.addScore(300);
-			Player.addCombo();
+			this.player[this.playerNum].addScore(300);
+			this.player[this.playerNum].addCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.GOOD:
-			Player.addScore(100);
-			Player.addCombo();
+			this.player[this.playerNum].addScore(100);
+			this.player[this.playerNum].addCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.BAD:
+			this.player[this.playerNum].missCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.MISS:
+			this.player[this.playerNum].missCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.NONE:
 			break;
 		}
-		Debug.Log (judge);
+		this.screen.screenJudgeAndCombo(judge);
+		//Debug.Log (judge);
 	}
 
 	public GameObject setNote(GameObject note, int time, int num){
 		this.notes [time, num] = note;
 		return note;
 	}
+
+	public void onDestroyNote(){
+		this.player[this.playerNum].missCombo();
+		this.screen.screenJudgeAndCombo(Judge.MISS);
+	}
+
 }

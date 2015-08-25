@@ -50,11 +50,12 @@ public class NoteGenerator : MonoBehaviour {
 					GameObject note = null;
 					if(i % 2 == 0){
 						note = (GameObject)Instantiate(RedNode, new Vector3(i + 1.0F, startY, 0.0F), Quaternion.identity);
-
 					} else {
 						note = (GameObject)Instantiate(BlueNode, new Vector3(i + 1.0F, startY, 0.0F), Quaternion.identity);
 					}
-					(note.GetComponent<Note>()).setNumber(i);
+					Note n = (note.GetComponent<Note>());
+					n.setNumber(i);
+					n.setController(this.controller);
 					this.controller.setNote(note, this.preMusicalTime, i);
 					break;
 				case 2:
