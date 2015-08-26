@@ -69,6 +69,27 @@ public class NoteGenerator : MonoBehaviour {
 					break;
 				}
 			}
+			switch(data[this.preMusicalTime, 7]){
+			case 0:
+				break;
+			case 1:
+				GameObject note = null;
+				note = (GameObject)Instantiate(RedNode, new Vector3(7.0F + 1.0F, startY, 0.0F), Quaternion.identity);
+				Note n = (note.GetComponent<Note>());
+				n.setNumber(7);
+				n.setController(this.controller);
+				this.controller.setNote(note, this.preMusicalTime, 7);
+				break;
+			case 2:
+				//TODO Begin Long Tone
+				break;
+			case 3:
+				//TODO End Long Tone
+				break;
+			case 4:
+				this.isPlaying = false;
+				break;
+			}
 		}
 	}
 }

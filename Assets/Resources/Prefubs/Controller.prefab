@@ -119,9 +119,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
   - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
   - {fileID: 8300000, guid: 9348f19bdc3164242b2f3169c95b9cd7, type: 3}
-  keys: 6d00000075000000620000007400000063000000650000007a0000000d000000
+  keys: 6d0000006a000000620000006700000063000000640000007a00000030010000
   judgeLag: .00999999978
   judgeY: 0
+  screen: {fileID: 0}
+  player: {fileID: 0}
+  ttable: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

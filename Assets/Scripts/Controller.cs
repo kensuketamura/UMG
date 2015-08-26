@@ -8,10 +8,11 @@ public class Controller : MonoBehaviour {
 	public GameObject[,] notes;
 	public float judgeLag = 0.1F;
 	public float judgeY;
+	public DataScreen screen;
+	public Player player;
+	public TurnTable ttable;
 	private AudioSource audioSrc;
 	private Music music;
-	private DataScreen screen;
-	private Player[] player = new Player[2];
 
 	public enum Judge{
 		PERFECT,
@@ -26,10 +27,8 @@ public class Controller : MonoBehaviour {
 	void Start () {
 		this.audioSrc = this.GetComponent<AudioSource> ();
 		this.music = GameObject.Find ("NoteGenerator").GetComponent<Music> ();
-		this.screen = GameObject.Find ("DataScreen").GetComponent<DataScreen> ();
-		this.player [0] = GameObject.Find ("Player1").GetComponent<Player> ();
-		//this.player [1] = GameObject.Find ("Player2").GetComponent<Player> ();
-		notes = new GameObject[2000, 7];
+		this.player = GameObject.Find ("Player1").GetComponent<Player> ();
+		notes = new GameObject[2000, 8];
 		this.judgeY = NoteGenerator.noteSpeed * (this.judgeLag / 0.01F);
 	}
 	
@@ -46,6 +45,9 @@ public class Controller : MonoBehaviour {
 				GameObject targetNote = this.findTargetNote(i);
 				if(targetNote != null){
 					this.evalAction(this.judge(targetNote), targetNote);
+				}
+				if(i == this.keys.Length - 1){
+					ttable.changeAngle();
 				}
 			}
 		}
@@ -100,26 +102,26 @@ public class Controller : MonoBehaviour {
 	private void evalAction(Judge judge, GameObject targetNote){
 		switch (judge) {
 		case Judge.PERFECT:
-			this.player[this.playerNum].addScore(500);
-			this.player[this.playerNum].addCombo();
+			this.player.addScore(500);
+			this.player.addCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.GREAT:
-			this.player[this.playerNum].addScore(300);
-			this.player[this.playerNum].addCombo();
+			this.player.addScore(300);
+			this.player.addCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.GOOD:
-			this.player[this.playerNum].addScore(100);
-			this.player[this.playerNum].addCombo();
+			this.player.addScore(100);
+			this.player.addCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.BAD:
-			this.player[this.playerNum].missCombo();
+			this.player.missCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.MISS:
-			this.player[this.playerNum].missCombo();
+			this.player.missCombo();
 			Destroy(targetNote);
 			break;
 		case Judge.NONE:
@@ -135,7 +137,7 @@ public class Controller : MonoBehaviour {
 	}
 
 	public void onDestroyNote(){
-		this.player[this.playerNum].missCombo();
+		this.player.missCombo();
 		this.screen.screenJudgeAndCombo(Judge.MISS);
 	}
 

@@ -18,6 +18,7 @@ public class StageGenerator : MonoBehaviour {
 		for (int i = 0; i <= this.nodeNum; i++) {
 			Instantiate(this.horizonLine, new Vector3(0.5F + 1.0F * i, 0, 0), Quaternion.identity);
 		}
+		Instantiate(this.horizonLine, new Vector3(2.5F + 1.0F * this.nodeNum, 0, 0), Quaternion.identity);
 		Instantiate(this.touchLine, new Vector3(0.5F, 0, 1), Quaternion.identity);
 		Instantiate(this.destroyArea, new Vector3(5.0F, -2.0F, 0), Quaternion.identity);
 		Instantiate(this.bottom, new Vector3(0, 0, 0), Quaternion.identity);
